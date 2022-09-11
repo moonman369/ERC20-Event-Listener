@@ -1,0 +1,42 @@
+body {
+  color: rgb(89, 147, 255);
+  text-shadow: 0 2px 20px rgb(165, 208, 243);
+  font-size: 35px;
+  font-weight: bold;
+  font-style: inherit;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: rgb(39, 41, 40);
+}
+
+textarea {
+  margin-top: 10px;
+  font-weight: 400;
+  color: rgb(90, 230, 137);
+  background-color: rgb(2, 0, 7);
+}
+
+button {
+  background-color: rgb(196, 238, 79);
+  margin-top: 10px;
+  margin-bottom: 10px;
+  color: rgb(0, 0, 0);
+  font-size: 1rem;
+  font-weight: 700;
+  font-family: inherit;
+  padding: 0.5rem 0.5rem;
+  transition: ease-in-out;
+  cursor: pointer;
+}
+
+button:hover {
+  transform: translateY(-1.75px);
+}
+
+.dev {
+  font-size: 0.75rem;
+  position: absolute;
+  color: rgb(117, 115, 248);
+  top: 10px;
+  right: 1rem;
+  text-shadow: 0 5px 15px rgba(192, 175, 255, 0.801);
+}

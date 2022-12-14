@@ -21,7 +21,9 @@ window.onload = async function () {
   if (window.ethereum) {
 
     // Initiating connect request
-    window.ethereum.request({ method: 'eth_requestAccounts' });
+    const addresses = await ethereum.request({ method: 'eth_requestAccounts' });
+    console.log(addresses)
+    document.getElementById('address').textContent = addresses[0]
 
     // Check Chain ID
     const chainId = await ethereum.request({ method: 'eth_chainId' });

@@ -12,15 +12,23 @@
       <p>Dev: Ayan, W3 Dev</p>
     </header>
     <main>
-      <p>TRANSFER EVENT LOG VIEWER <br /></p>
       <div>
+        <p>TRANSFER EVENT LOG VIEWER <br /></p>
+      </div>
+      <div class="right_div">
+        <p>
+          Connected Account: <span id="address">N/A</span>
+        </p>
+      </div>
+      <div class="left_div">
         <textarea id="logs" rows="30" cols="100" readonly>
 Initializing...
         </textarea>
+        <div>
+          <button id="viewLogs">View Old Logs</button>
+        </div>
       </div>
-      <div>
-        <button id="viewLogs">View Old Logs</button>
-      </div>
+      
     </main>
     <script src="main.js" type="module"></script>
   </body>

@@ -3,6 +3,7 @@ let addresses = [
   "0x5FbDB2315678afecb367f032d93F642f64180aa3",
   "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512",
   "0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0",
+  "0x0165878A594ca255338adfa4d48449f69242Eb8F"
 ];
 
 // Async `sleep()` funcion
@@ -18,13 +19,30 @@ const sleep = async (timeInMs) => {
 window.onload = async function () {
   // Checking for Metamask Provider
   if (window.ethereum) {
+
+    // Initiating connect request
+    window.ethereum.request({ method: 'eth_requestAccounts' });
+
+    // Check Chain ID
+    const chainId = await ethereum.request({ method: 'eth_chainId' });
+
+    // Switching chain to localhost if different
+    if (chainId !== "0x7a69") {
+      window.ethereum.request({
+        method: 'wallet_switchEthereumChain',
+        params: [{chainId: '0x7a69'}]
+      })
+    }
+
     console.log("Log Viewer is loaded");
+
     // Giving dynamic appearance to text-area
     document.getElementById("logs").textContent = `Listening for new events...`;
     await sleep(5000);
     document.getElementById(
       "logs"
     ).textContent = `No new events were detected. Fetching existing logs...`;
+
     // Creating a subscription for listener to detect new events
     await window.ethereum.request({
       id: 31337, // Hardhat chain id
@@ -114,7 +132,7 @@ async function getLogs(indicator /* differenciates call contexts */) {
     }
 
     // Sorting logs and pushing them to corresponding arrays
-    for (let i = 0; i < logs.length; i++) {
+    for (let i = logs.length - 1; i >= 0; i--) {
       // Additional checks to filter out the possibility of potential bugs
       if (
         Object.keys(resultJSON).includes(logs[i].address) && // Checks if resultJSON.keys contains a log.address

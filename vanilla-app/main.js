@@ -1,5 +1,7 @@
 // Addresses for which logs must be fetched and displayed
+let chain = ''
 let addresses = [
+  "0x95aD61b0a150d79219dCF64E1E6Cc01f0B64C4cE",
   "0x5FbDB2315678afecb367f032d93F642f64180aa3",
   "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512",
   "0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0",
@@ -97,17 +99,24 @@ async function getLogs(indicator /* differenciates call contexts */) {
     await sleep(1500);
   }
 
+  const latest = await ethereum.request({
+    method: 'eth_blockNumber',
+    id: chain
+  })
+
+  const earliest = `0x${(parseInt(latest, 16) - 2000).toString(16)}`
+
   // Calling the `ethereum.request()` function and passing the Request args in JSON format
   let logs = await window.ethereum
     .request({
-      id: 31337, // Hardhat chain id
+      id: chain, // Hardhat chain id
       jsonrpc: 2, // JSON RPC version
       method: "eth_getLogs", // Method name
       params: [
         {
-          fromBlock: "earliest", // Analogous to 0
-          toBlock: "latest", // Last mined block
-          address: addresses, // Array of addresses for which logs must be fetched. Not applicable for hardhat/ethers
+          fromBlock: earliest, // Analogous to 0
+          toBlock: latest, // Last mined block
+          address: [addresses[0]], // Array of addresses for which logs must be fetched. Not applicable for hardhat/ethers
           topics: [
             // 32bytes hash for Transfer event interface
             "0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef",
@@ -177,7 +186,7 @@ document.getElementById("viewLogs").addEventListener(
 );
 
 document.getElementById("setChain").addEventListener('click', async () => {
-  const chain = `0x${Number(document.querySelector(".chain_id_input").value).toString(16)}`
+  chain = `0x${Number(document.querySelector(".chain_id_input").value).toString(16)}`
   console.log(chain)
   window.ethereum.request({
     method: 'wallet_switchEthereumChain',

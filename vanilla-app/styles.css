@@ -15,7 +15,7 @@ textarea {
   background-color: rgb(2, 0, 7);
 }
 
-button {
+.view_logs_btn {
   background-color: rgb(196, 238, 79);
   margin-top: 10px;
   margin-bottom: 10px;
@@ -28,6 +28,20 @@ button {
   padding: 0.5rem 0.5rem;
   transition: ease-in-out;
   cursor: pointer;
+}
+
+.chain_id_input {
+  width: 100px;
+  height: 20px;
+}
+
+.chain_id_btn {
+  padding: auto;
+  background-color: rgb(91, 139, 179);
+  color: rgb(0, 0, 0);
+  padding: 0.25rem 0.25rem;
+  width: 10;
+  height: 20;
 }
 
 button:hover {

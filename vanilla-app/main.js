@@ -29,12 +29,12 @@ window.onload = async function () {
     const chainId = await ethereum.request({ method: 'eth_chainId' });
 
     // Switching chain to localhost if different
-    if (chainId !== "0x7a69") {
-      window.ethereum.request({
-        method: 'wallet_switchEthereumChain',
-        params: [{chainId: '0x7a69'}]
-      })
-    }
+    // if (chainId !== "0x7a69") {
+    //   window.ethereum.request({
+    //     method: 'wallet_switchEthereumChain',
+    //     params: [{chainId: '0x7a69'}]
+    //   })
+    // }
 
     console.log("Log Viewer is loaded");
 
@@ -175,3 +175,12 @@ document.getElementById("viewLogs").addEventListener(
     await getLogs();
   }
 );
+
+document.getElementById("setChain").addEventListener('click', async () => {
+  const chain = `0x${Number(document.querySelector(".chain_id_input").value).toString(16)}`
+  console.log(chain)
+  window.ethereum.request({
+    method: 'wallet_switchEthereumChain',
+    params: [{chainId: chain}]
+  })
+})

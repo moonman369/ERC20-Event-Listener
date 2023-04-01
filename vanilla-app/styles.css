@@ -35,6 +35,15 @@ textarea {
   height: 20px;
 }
 
+.connect-btn {
+  background-color: aquamarine;
+  font-weight: 600;
+  font-size: x-large;
+  border-radius: 10px;
+  padding: 10px;
+  cursor: pointer;
+}
+
 .chain_id_btn {
   padding: auto;
   background-color: rgb(91, 139, 179);

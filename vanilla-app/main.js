@@ -1,12 +1,20 @@
+// import { ethers } from "./node_modules/ethers/src.ts/index";
 // Addresses for which logs must be fetched and displayed
-let chain = ''
+let chain = "";
 let addresses = [
   "0x95aD61b0a150d79219dCF64E1E6Cc01f0B64C4cE",
   "0x5FbDB2315678afecb367f032d93F642f64180aa3",
   "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512",
   "0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0",
-  "0x0165878A594ca255338adfa4d48449f69242Eb8F"
+  "0x0165878A594ca255338adfa4d48449f69242Eb8F",
 ];
+
+let connectBtn = document.querySelector(".connect-btn");
+
+connectBtn.addEventListener("click", () => {
+  console.log(window.ethereum);
+  window.ethereum.getAccounts();
+});
 
 // Async `sleep()` funcion
 const sleep = async (timeInMs) => {
@@ -21,14 +29,13 @@ const sleep = async (timeInMs) => {
 window.onload = async function () {
   // Checking for Metamask Provider
   if (window.ethereum) {
-
     // Initiating connect request
-    const addresses = await ethereum.request({ method: 'eth_requestAccounts' });
-    console.log(addresses)
-    document.getElementById('address').textContent = addresses[0]
+    const addresses = await ethereum.request({ method: "eth_requestAccounts" });
+    console.log(addresses);
+    document.getElementById("address").textContent = addresses[0];
 
     // Check Chain ID
-    const chainId = await ethereum.request({ method: 'eth_chainId' });
+    const chain = await ethereum.request({ method: "eth_chainId" });
 
     // Switching chain to localhost if different
     // if (chainId !== "0x7a69") {
@@ -49,7 +56,7 @@ window.onload = async function () {
 
     // Creating a subscription for listener to detect new events
     await window.ethereum.request({
-      id: 31337, // Hardhat chain id
+      id: chain, // Hardhat chain id
       jsonrpc: 2, // JSON RPC version
       method: "eth_subscribe", // Method name
       params: [
@@ -100,11 +107,11 @@ async function getLogs(indicator /* differenciates call contexts */) {
   }
 
   const latest = await ethereum.request({
-    method: 'eth_blockNumber',
-    id: chain
-  })
+    method: "eth_blockNumber",
+    id: chain,
+  });
 
-  const earliest = `0x${(parseInt(latest, 16) - 2000).toString(16)}`
+  const earliest = `0x${(parseInt(latest, 16) - 2000).toString(16)}`;
 
   // Calling the `ethereum.request()` function and passing the Request args in JSON format
   let logs = await window.ethereum
@@ -116,7 +123,7 @@ async function getLogs(indicator /* differenciates call contexts */) {
         {
           fromBlock: earliest, // Analogous to 0
           toBlock: latest, // Last mined block
-          address: [addresses[0]], // Array of addresses for which logs must be fetched. Not applicable for hardhat/ethers
+          address: addresses, // Array of addresses for which logs must be fetched. Not applicable for hardhat/ethers
           topics: [
             // 32bytes hash for Transfer event interface
             "0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef",
@@ -185,11 +192,19 @@ document.getElementById("viewLogs").addEventListener(
   }
 );
 
-document.getElementById("setChain").addEventListener('click', async () => {
-  chain = `0x${Number(document.querySelector(".chain_id_input").value).toString(16)}`
-  console.log(chain)
+document.getElementById("setChain").addEventListener("click", async () => {
+  chain = `0x${Number(document.querySelector(".chain_id_input").value).toString(
+    16
+  )}`;
+  console.log(chain);
   window.ethereum.request({
-    method: 'wallet_switchEthereumChain',
-    params: [{chainId: chain}]
-  })
-})
+    method: "wallet_switchEthereumChain",
+    params: [{ chainId: chain }],
+  });
+});
+
+// document.getElementById("addAddress").addEventListener("click", async () => {
+//   const contract = document.querySelector(".add_address_input").value;
+//   ethers.utils.isAddress(contract) && addresses.push(contract);
+//   console.log(addresses);
+// });

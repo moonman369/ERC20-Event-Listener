@@ -8,21 +8,36 @@
     <title>Transfer Event Log Viewer</title>
   </head>
   <body>
-    <header class="dev">
-      <p>Dev: Ayan, W3 Dev</p>
-    </header>
+    <nav>
+      <header class="dev">
+        <p>Dev: Ayan, W3 Dev</p>
+      </header>
+      <button class="connect-btn">Connect</button>
+    </nav>
     <main>
       <div>
         <p>TRANSFER EVENT LOG VIEWER <br /></p>
       </div>
       <div class="right_div">
-        <p>
-          Connected Account: <span id="address">N/A</span>
-        </p>
-        <br>
+        <p>Connected Account: <span id="address">N/A</span></p>
+        <br />
         <div class="chain_id">
-          <input class="chain_id_input" type="number" placeholder="Enter chain id">&nbsp;
-        <button class="chain_id_btn" id="setChain">Set chain</button>
+          <input
+            class="chain_id_input"
+            type="number"
+            placeholder="Enter chain id"
+          />&nbsp;
+          <button class="chain_id_btn" id="setChain">Set Chain</button>
+          <br />
+          <br />
+        </div>
+        <div class="add_address">
+          <input
+            class="add_address_input"
+            type="text"
+            placeholder="Enter contract address"
+          />&nbsp;
+          <button class="add_address_btn" id="addAddress">Add Address</button>
         </div>
       </div>
       <div class="left_div">
@@ -33,7 +48,6 @@ Initializing...
           <button class="view_logs_btn" id="viewLogs">View Old Logs</button>
         </div>
       </div>
-      
     </main>
     <script src="main.js" type="module"></script>
   </body>

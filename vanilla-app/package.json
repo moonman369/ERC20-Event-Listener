@@ -1,0 +1,16 @@
+{
+  "name": "vanilla-app",
+  "version": "1.0.0",
+  "description": "- This is a simple webpage made using VanillaJS stack for listening to, fetching and displaying ERC20 contract event logs using Metamask Provider API.",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "ethers": "^5.7.2",
+    "hardhat": "^2.12.4"
+  }
+}
